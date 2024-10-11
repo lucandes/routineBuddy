@@ -1,0 +1,155 @@
+:root {
+  --background-color: #2b2b2b;
+  --text-color: lightgrey;
+  --available-color: lightgreen;
+  --occupied-color: #f3ff3b;
+  --bar-background-color: lightgreen;
+  --hour-indicator-border: grey;
+  --new-button-background: #ffc800;
+  --delete-button-background: #bb0000;
+  --new-activity-background: #242424;
+}
+
+body {
+  font-family: "system-ui";
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+}
+
+#avaliable {
+  color: var(--available-color);
+}
+
+#occupied {
+  color: var(--occupied-color);
+}
+
+#bar_field {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+#planner_bar {
+  /*   border: 1px solid red; */
+  background-color: var(--bar-background-color);
+  border-radius: 5px;
+  width: 80%;
+  height: 20px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#planner_bar div {
+  height: 100%;
+  border-radius: inherit;
+  position: absolute;
+  box-shadow: 0 0 10px rgb(0,0,0,0.3);
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+#hour_indicator {
+  width: 80%;
+  margin: 5px auto;
+  display: flex;
+}
+
+#hour_indicator div {
+  position: relative;
+  border: 1px solid var(--hour-indicator-border);
+  border-width: 0 0 0 1px;
+  width: 100%;
+  height: 15px;
+}
+
+#hour_indicator div:nth-last-child(2){
+  border-width: 0 1px 0 1px;
+}
+
+#hour_indicator div:last-child {
+  border: none;
+  border-right: 1px solid var(--hour-indicator-border);
+}
+
+
+#hour_indicator div.show {
+  height: 30px;
+}
+
+#hour_indicator div p {
+  position: absolute;
+  top: 5px;
+  left: 10%;
+}
+
+#button_field {
+  margin: 20px auto;
+}
+
+#button_field button {
+  width: 200px;
+  font-size: 16px;
+  padding: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+#button_field #new {
+  background-color: var(--new-button-background);
+  color: black;
+}
+
+#button_field #del {
+  background-color: var(--delete-button-background);
+  color: white;
+}
+
+#new_activity {
+  background-color: rgb(0,0,0,0.4);
+  box-shadow: inset 0 0 15px black;
+  color: white;
+  font-size: 18px;
+  padding: 0px;
+  overflow-y: hidden;
+  transition: height 0.5s, padding 0.5s, background-color 0.8s;
+  height: 0px;
+}
+
+#new_activity.open {
+  background-color: rgb(0,0,0,0);
+  height: 160px;
+  padding: 20px;
+}
+
+#new_activity p {
+  display: inline-block;
+  margin: 10px;
+}
+
+#new_activity input {
+  font-size: 14px;
+}
+
+#new_activity input#name {
+  padding: 5px 3px;
+}
+
+#new_activity button {
+  width: 150px;
+  height: 30px;
+  margin: 15px;
+  margin-bottom: 0;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-style: unset; 
+  box-shadow: 3px 3px 5px rgb(0,0,0,0.4);
+}
+
+#new_activity #add {
+  background-color: var(--new-button-background);
+  
+  
+}
