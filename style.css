@@ -45,9 +45,16 @@ body {
   border-radius: inherit;
   position: absolute;
   box-shadow: 0 0 10px rgb(0,0,0,0.3);
-  color: white;
-  text-shadow: 1px 1px 2px black;
 }
+
+#planner_bar div p {
+  /* trick to always make the text contrast with bg since its a user choice*/
+  color: white;
+  mix-blend-mode: exclusion;
+  margin: 0;
+}
+
+
 
 #hour_indicator {
   width: 80%;

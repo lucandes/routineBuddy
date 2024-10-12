@@ -10,6 +10,7 @@ testButton.onclick = () => {
   let newAct = new Activity("Dormir", "white", "10:00", "17:30");
   activityList.push(newAct);
   console.log("New activity created: "+newAct.name);
+  testButton.style.display = "none";
   updateRoutineBar();
 }
 
@@ -52,11 +53,16 @@ function addNewActivity(){
 
   activityList.push(newAct);
   console.log("New activity created: "+newAct.name);
+  toggleAddActivityTab();
   updateRoutineBar();
 }
 
 function toggleAddActivityTab(){
   NAElem.classList.toggle("open");
+  name_NAElem.value = '';
+  color_NAElem.value = '#000000';
+  start_NAElem.value = "";
+  end_NAElem.value = "";
 }
 
 function updateRoutineBar(){
@@ -74,9 +80,13 @@ function updateRoutineBar(){
 
       let firstPart = document.createElement('div');
       firstPart.style.backgroundColor = activityObj.color;
-      firstPart.innerHTML = activityObj.name;
       firstPart.style.left = '0';
       firstPart.style.width = (percentage.toFixed(2)).toString()+"%";
+
+      let firstPart_name = document.createElement('p');
+      firstPart_name.innerHTML = activityObj.name;
+
+      firstPart.appendChild(firstPart_name);
       plannerBar.appendChild(firstPart);
 
       let fromStartToMidnightInMinutes = (24 - parseInt(activityObj.start.split(':')[0])) * 60;
@@ -88,9 +98,13 @@ function updateRoutineBar(){
 
       let secondPart = document.createElement('div');
       secondPart.style.backgroundColor = activityObj.color;
-      secondPart.innerHTML = activityObj.name;
       secondPart.style.right = '0';
       secondPart.style.width = (percentage.toFixed(2)).toString()+"%";
+
+      let secondPart_name = document.createElement('p');
+      secondPart_name.innerHTML = activityObj.name;
+      
+      secondPart.appendChild(firstPart_name);
       plannerBar.appendChild(secondPart);
     }
     else if (activityObj.start < activityObj.end){
@@ -109,10 +123,14 @@ function updateRoutineBar(){
       console.log("Start startPosition: "+startPosition.toFixed(2));
 
       let activityElement = document.createElement('div');
-      activityElement.innerHTML = activityObj.name;
       activityElement.style.backgroundColor = activityObj.color;
       activityElement.style.left = startPosition+"%";
       activityElement.style.width = (percentage.toFixed(2)).toString()+"%";
+
+      let activityElement_name = document.createElement('p');
+      activityElement_name.innerHTML = activityObj.name;
+      
+      activityElement.appendChild(activityElement_name);
       plannerBar.appendChild(activityElement);
     }
   })
@@ -127,9 +145,9 @@ class Activity{
     this.name = name;
     this.color = color;
     this.start = start;
-    this.end = end;
-    this.duration;
+    this.end = end;    
     this.crossDay = start > end ? true : false;
+    this.duration = this.#getDuration();
   }
 
   verifyConflict(newActivity){
@@ -141,6 +159,28 @@ class Activity{
     }
     return false;
   }
+
+  #getDuration(){
+    let dur = [0, 0];
+    let startNumber = (this.start).split(':').map(Number);
+    let endNumber = (this.end).split(':').map(Number);
+
+    if (!this.crossDay){
+      dur[0] = endNumber[0] - startNumber[0];
+      dur[1] = endNumber[1] - startNumber[1];
+
+    } else if (this.crossDay){
+      dur[0] = (24 - startNumber[0]) + endNumber[0];
+      dur[1] = endNumber[1] - startNumber[1];
+    }
+    
+    if (dur[1] < 0){
+      dur[0]--;
+      dur[1] += 60;
+    }
+
+    return dur;
+  };
 } /* Activity class end */
 
 add_NAElem.onclick = addNewActivity;
