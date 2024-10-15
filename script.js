@@ -7,7 +7,7 @@ const plannerBar = document.querySelector("#bar_field #planner_bar");
 //// DEBUG, REMOVE LATER
 const testButton = document.querySelector("#teste");
 testButton.onclick = () => {
-  let newAct = new Activity("Dormir", "white", "10:00", "17:30");
+  let newAct = new Activity("Dormir", "white", "22:00", "06:30");
   activityList.push(newAct);
   console.log("New activity created: "+newAct.name);
   testButton.style.display = "none";
@@ -67,6 +67,8 @@ function toggleAddActivityTab(){
 
 function updateRoutineBar(){
   plannerBar.innerHTML = '';
+  occupiedMinutes = 0;
+  avaliableMinutes = 1440;
   
   activityList.forEach((activityObj, index) => {
     
@@ -104,7 +106,7 @@ function updateRoutineBar(){
       let secondPart_name = document.createElement('p');
       secondPart_name.innerHTML = activityObj.name;
       
-      secondPart.appendChild(firstPart_name);
+      secondPart.appendChild(secondPart_name);
       plannerBar.appendChild(secondPart);
     }
     else if (activityObj.start < activityObj.end){
@@ -133,7 +135,26 @@ function updateRoutineBar(){
       activityElement.appendChild(activityElement_name);
       plannerBar.appendChild(activityElement);
     }
+
+    occupiedMinutes += (activityObj.duration[0] * 60) + activityObj.duration[1];
+    console.log(occupiedMinutes);
   })
+  
+  updateRoutineTimeInfo();
+}
+
+function updateRoutineTimeInfo(){
+  avaliableTime = []
+  occupiedTime = []
+  
+  avaliableMinutes -= occupiedMinutes;
+  avaliableTime.push(parseInt(avaliableMinutes / 60));
+  avaliableTime.push(avaliableMinutes % 60);
+  occupiedTime.push(parseInt(occupiedMinutes / 60));
+  occupiedTime.push(occupiedMinutes % 60);
+  
+  avaliableElem.innerHTML = avaliableTime[0] + " hours " + avaliableTime[1] + " minutes";
+  occupiedElem.innerHTML = occupiedTime[0] + " hours " + occupiedTime[1] + " minutes";
 }
 
 function displayError(message){
@@ -152,13 +173,16 @@ class Activity{
 
   verifyConflict(newActivity){
     /* I know this looks confusing but idk another way to do it */
-    if (!this.crossDay) {
-      if ((this.start < newActivity.start && this.end > newActivity.start) || (this.start < newActivity.end && this.end > newActivity.end)) return true;
-    } else if (this.crossDay){
-      if ((this.start < newActivity.start) || (this.start < newActivity.end) || (this.end > newActivity.end) || (this.end > newActivity.start)) return true;
+    if (!this.crossDay && !newActivity.crossDay) {
+      if (this.start > newActivity.end || this.end < newActivity.start) return false;
+    } else if (!this.crossDay && newActivity.crossDay){
+      if (this.start > newActivity.end && this.end < newActivity.start) return false;
+    } else if (this.crossDay && !newActivity.crossDay){
+      if (this.start > newActivity.end && this.end < newActivity.start) return false;
     }
-    return false;
+    return true;
   }
+
 
   #getDuration(){
     let dur = [0, 0];
@@ -188,6 +212,8 @@ addNewActivityButton.onclick = toggleAddActivityTab;
 cancel_NAElem.onclick = toggleAddActivityTab;
 
 /* LETS */
-let avaliable = 2400;
-let occupied = 0;
+let avaliableMinutes = 1440;
+let avaliableTime = []
+let occupiedMinutes = 0; 
+let occupiedTime = []
 let activityList = []

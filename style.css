@@ -35,7 +35,7 @@ body {
   background-color: var(--bar-background-color);
   border-radius: 5px;
   width: 80%;
-  height: 20px;
+  height: 40px;
   margin: 0 auto;
   position: relative;
 }
@@ -45,6 +45,20 @@ body {
   border-radius: inherit;
   position: absolute;
   box-shadow: 0 0 10px rgb(0,0,0,0.3);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1);
+  transition: 0.2s;
+  cursor: pointer;  
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#planner_bar div:hover {
+  transform: scaleY(115%);
+  letter-spacing: 2px;
 }
 
 #planner_bar div p {
