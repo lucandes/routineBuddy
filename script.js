@@ -7,7 +7,7 @@ const plannerBar = document.querySelector("#bar_field #planner_bar");
 //// DEBUG, REMOVE LATER
 const testButton = document.querySelector("#teste");
 testButton.onclick = () => {
-  let newAct = new Activity("Dormir", "white", "22:00", "06:30");
+  let newAct = new Activity("Dormir", "white", "23:00", "06:30");
   activityList.push(newAct);
   console.log("New activity created: "+newAct.name);
   testButton.style.display = "none";
@@ -88,9 +88,6 @@ function updateRoutineBar(){
       let firstPart_name = document.createElement('p');
       firstPart_name.innerHTML = activityObj.name;
 
-      firstPart.appendChild(firstPart_name);
-      plannerBar.appendChild(firstPart);
-
       let fromStartToMidnightInMinutes = (24 - parseInt(activityObj.start.split(':')[0])) * 60;
       fromStartToMidnightInMinutes -= parseInt(activityObj.start.split(':')[1]);
 
@@ -106,6 +103,14 @@ function updateRoutineBar(){
       let secondPart_name = document.createElement('p');
       secondPart_name.innerHTML = activityObj.name;
       
+      /* setting a single reaction to both elements hover */
+      firstPart.addEventListener('mouseenter', () => {mouseOverReaction('mouseenter',firstPart, secondPart)});
+      secondPart.addEventListener('mouseenter', () => {mouseOverReaction('mouseenter',firstPart, secondPart)});
+      firstPart.addEventListener('mouseleave', () => {mouseOverReaction('mouseleave',firstPart, secondPart)});
+      secondPart.addEventListener('mouseleave', () => {mouseOverReaction('mouseleave',firstPart, secondPart)});
+
+      firstPart.appendChild(firstPart_name);
+      plannerBar.appendChild(firstPart);
       secondPart.appendChild(secondPart_name);
       plannerBar.appendChild(secondPart);
     }
@@ -157,8 +162,20 @@ function updateRoutineTimeInfo(){
   occupiedElem.innerHTML = occupiedTime[0] + " hours " + occupiedTime[1] + " minutes";
 }
 
+/** minor functions */
+
 function displayError(message){
   alert("Error: "+message);
+}
+
+function mouseOverReaction(actionType, elem1, elem2){
+  if (actionType == 'mouseenter'){
+    elem1.style.transform = "scaleY(115%)";
+    elem2.style.transform = "scaleY(115%)";
+  } else if (actionType == 'mouseleave'){
+    elem1.style.transform = "scaleY(1)";
+    elem2.style.transform = "scaleY(1)";
+  }
 }
 
 class Activity{

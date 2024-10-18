@@ -54,6 +54,8 @@ body {
   cursor: pointer;  
   text-transform: uppercase;
   letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 #planner_bar div:hover {
