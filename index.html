@@ -8,10 +8,12 @@
 </head>
 <body>
 	<h1>RoutineBuddy</h1>
-	<button id="teste">TESTE ME</button>
+	
 
-	<h3 id="avaliable">Avaliable: <span>24 hours</span></h3>
-	<h3 id="occupied">Occupied: <span>0 hours</span></h3>
+	<div id="button_field">
+		<button id="teste">Test Activity</button>
+		<button id="new">New Activity</button>
+	</div>
 
 	<div id="bar_field">
 		<div id="planner_bar">
@@ -44,11 +46,6 @@
 		</div>
 	</div>
 
-	<div id="button_field">
-		<button id="del">Remove Activity</button>
-		<button id="new">New Activity</button>
-	</div>
-
 	<div id="new_activity">
 		<p>Activity name</p><input type="text" name="actname" placeholder="Ex.: Jogging, Studying" id="name">
 		<p>Select a color:</p><input type="color" id="color"><br>
@@ -57,6 +54,18 @@
 		<div>
 			<button id="cancel">Cancel</button>
 			<button id="add">Add</button>
+		</div>
+	</div>
+
+	<div id="manager">
+		<h2 id="empty_message">Create a new activity to see statistics about your routine.</h2>
+		<div id="list">
+			<h2>Current Activities</h2>
+			<ul></ul>
+		</div>
+		<div id="statistics">
+			<h3 id="avaliable">Avaliable: <span>24 hours</span></h3>
+			<h3 id="occupied">Occupied: <span>0 hours</span></h3>
 		</div>
 	</div>
 

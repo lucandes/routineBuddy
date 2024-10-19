@@ -3,6 +3,10 @@ const avaliableElem = document.querySelector("#avaliable span");
 const occupiedElem = document.querySelector("#occupied span");
 const addNewActivityButton = document.querySelector("#button_field #new");
 const plannerBar = document.querySelector("#bar_field #planner_bar");
+const manager = document.querySelector("#manager");
+const managerEmptyMessage = document.querySelector("#manager #empty_message");
+const managerListField = document.querySelector("#manager #list");
+const managerList = document.querySelector("#manager #list ul");
 
 //// DEBUG, REMOVE LATER
 const testButton = document.querySelector("#teste");
@@ -145,10 +149,27 @@ function updateRoutineBar(){
     console.log(occupiedMinutes);
   })
   
-  updateRoutineTimeInfo();
+  updateManager();
 }
 
-function updateRoutineTimeInfo(){
+function updateManager(){
+  /** list field */
+  managerList.innerHTML = '';
+  if (activityList.length > 0){
+    activityList.forEach((item) => {
+      let newItem = document.createElement('li');
+      let pName = document.createElement('p');
+      let pTime = document.createElement('p');
+      pName.innerHTML = item.name;
+      pTime.innerHTML = item.start+" / "+item.end;
+      newItem.appendChild(pName);
+      newItem.appendChild(pTime);
+      newItem.style.backgroundColor = item.color;
+      managerList.appendChild(newItem);
+    })
+  }
+
+  /** statistics field */ 
   avaliableTime = []
   occupiedTime = []
   
