@@ -4,71 +4,118 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://kit.fontawesome.com/7bc3df576e.js" crossorigin="anonymous"></script>
 	<title>RoutineBuddy</title>
 </head>
 <body>
-	<h1>RoutineBuddy</h1>
+	<h1 id="logo">Routine<span>Buddy</span></h1>
+	<button id="teste">Test Activity</button>
 	
-
-	<div id="button_field">
-		<button id="teste">Test Activity</button>
-		<button id="new">New Activity</button>
-	</div>
-
-	<div id="bar_field">
-		<div id="planner_bar">
-		</div>
-		<div id="hour_indicator">
-			<div class="show"><p>0h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>3h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>6h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>9h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>12h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>15h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>18h</p></div>
-			<div></div>
-			<div></div>
-			<div class="show"><p>21h</p></div>
-			<div></div>
-			<div class="show"></div>
-		</div>
-	</div>
-
 	<div id="new_activity">
-		<p>Activity name</p><input type="text" name="actname" placeholder="Ex.: Jogging, Studying" id="name">
-		<p>Select a color:</p><input type="color" id="color"><br>
-		<p>Start time:</p><input type="time" id="start">
-		<p>End time:</p><input type="time" id="end">
+		<h2>Create <span>Activity</span></h2>
 		<div>
-			<button id="cancel">Cancel</button>
-			<button id="add">Add</button>
+			<span>Name</span><input type="text" name="actname" placeholder="Jogging, studying" id="name">
+			<input type="color" id="color">
+		</div>
+		
+		<div>
+			<span>Start</span><input type="time" id="start">
+			<span>End</span><input type="time" id="end">
+		</div>
+
+		<div id="category">
+			<div id="category_field">
+				<div id="selector"></div>
+				<div class="item selected">
+					<i class="fas fa-clock"></i>
+					<span>Productive</span>
+				</div>
+
+				<div class="item">
+					<i class="fas fa-bed"></i>
+					<span>Rest</span>
+				</div>
+
+				<div class="item">
+					<i class="fas fa-gamepad"></i>
+					<span>Relax</span>
+				</div>
+
+				<div class="item">
+					<i class="fas fa-clipboard-question"></i>
+					<span>Other</span>
+				</div>
+			</div>
+		</div>
+
+		<div id="button_field">
+			<button id="cancel"><i class="fa-solid fa-xmark"></i></button>
+			<button id="add"><i class="fa-solid fa-plus"></i></button>
+		</div>
+
+	</div>
+
+	<div id="routine_display">
+		<button id="new_activity_button">New Activity</button>
+		<div id="bar_field">
+			<div id="planner_bar"></div>
+			<div id="hour_indicator">
+				<div class="show"><p>0h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>3h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>6h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>9h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>12h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>15h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>18h</p></div>
+				<div></div>
+				<div></div>
+				<div class="show"><p>21h</p></div>
+				<div></div>
+				<div class="show"></div>
+			</div>
 		</div>
 	</div>
 
 	<div id="manager">
 		<h2 id="empty_message">Create a new activity to see statistics about your routine.</h2>
-		<div id="list">
+		<div id="list" class="hide">
 			<h2>Current Activities</h2>
 			<ul></ul>
 		</div>
-		<div id="statistics">
-			<h3 id="avaliable">Avaliable: <span>24 hours</span></h3>
-			<h3 id="occupied">Occupied: <span>0 hours</span></h3>
+		<div id="statistics" class="hide">
+
+			<div id="occupied" class="circular_progress_field">
+				<div class="circular_progress">
+					<span id="progress_value">0%</span>
+					<span id="text">Reserved</span>
+				</div>
+			</div>
+
+			<div id="productivity" class="circular_progress_field">
+				<div class="circular_progress">
+					<span id="progress_value">0%</span>
+					<span id="text">Work rate</span>
+				</div>
+			</div>
+
+			<!-- <h3 id="avaliable">Avaliable: <span>24 hours</span></h3>
+			<h3 id="occupied">Occupied: <span>0 hours</span></h3> -->
 		</div>
 	</div>
 
+	<div id="black_screen"></div>
 </body>
 <script type="text/javascript" src="script.js"></script>
 </html>

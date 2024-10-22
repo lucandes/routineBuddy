@@ -1,20 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700&display=swap');
+
 :root {
-  --background-color: #2b2b2b;
+  --background-color: #2F343B;
+  --new-button-background: #a2c766;
+  --bar-background-color: #7E827A;
+
   --text-color: lightgrey;
-  --available-color: lightgreen;
+  --available-color: #2b2b2b;
   --occupied-color: #f3ff3b;
-  --bar-background-color: lightgreen;
   --hour-indicator-border: grey;
-  --new-button-background: #ffc800;
   --delete-button-background: #bb0000;
   --new-activity-background: #242424;
 }
 
 body {
-  font-family: "system-ui";
+  font-family: Poppins, "system-ui";
   background-color: var(--background-color);
   color: var(--text-color);
   text-align: center;
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#black_screen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0,0,0,0.7);
+  z-index: 10;
+}
+
+#black_screen.show {
+  display: block;
 }
 
 #avaliable {
@@ -25,22 +48,80 @@ body {
   color: var(--occupied-color);
 }
 
-#bar_field {
-  max-width: 1000px;
-  margin: 0 auto;
+#logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 10px;
+  border: 1px solid var(--new-button-background);
+  border-width: 1px 0 0 1px;
+  padding: 0px 5px;
 }
 
-#planner_bar {
-  /*   border: 1px solid red; */
+#logo span {
+  color: var(--new-button-background);
+}
+
+#routine_display {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 50px auto 10px auto;
+}
+
+#routine_display #new_activity_button {
+  width: 240px;
+  height: 30px;
+  border-radius: 6px 6px 0 0 ;
+  /* margin: 15px; */
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-weight: 100;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(0,0,0,0.5);
+  color: var(--new-button-background);
+  transform: none;
+  transition: 0.2s;
+  /* box-shadow: inset 0 -5px 5px rgb(0,0,0,0.3); */
+}
+
+#routine_display #new_activity_button:hover {
+  /* width: 300px; */
+  transition: cubic-bezier(0, 0, 0, 0.99) 1s;
+  /* transition: 0.5s, width 0.8s, background-color 0s; */
+  /* height: 50px; */
+  /* margin-bottom: 5px; */
+  /* box-shadow: 0 0 20px rgb(0,0,0,0.5); */
+
+  /* letter-spacing: 8px; */
+  /* font-size: 16px; */
+  background-color: white;
+  color: var(--background-color);
+}
+
+#routine_display #bar_field {
+  max-width: 800px;
+  min-width: 500px;
+  width: 100%;
+  /* margin: 0 auto; */
+}
+
+#routine_display #planner_bar {
+  /* border: 1px solid white; */
   background-color: var(--bar-background-color);
-  border-radius: 5px;
-  width: 80%;
+  border-radius: 10px 10px 0 0;
+  /* width: 80%; */
   height: 40px;
-  margin: 0 auto;
   position: relative;
 }
 
-#planner_bar div {
+#routine_display #planner_bar div {
   height: 100%;
   border-radius: inherit;
   position: absolute;
@@ -58,27 +139,24 @@ body {
   text-overflow: clip;
 }
 
-#planner_bar div:hover {
+#routine_display #planner_bar div:hover {
   transform: scaleY(115%);
   letter-spacing: 2px;
 }
 
-#planner_bar div p {
+#routine_display #planner_bar div p {
   /* trick to always make the text contrast with bg since its a user choice*/
   color: white;
   mix-blend-mode: exclusion;
   margin: 0;
 }
 
-
-
-#hour_indicator {
-  width: 80%;
+#routine_display #hour_indicator {
   margin: 5px auto;
   display: flex;
 }
 
-#hour_indicator div {
+#routine_display #hour_indicator div {
   position: relative;
   border: 1px solid var(--hour-indicator-border);
   border-width: 0 0 0 1px;
@@ -86,42 +164,23 @@ body {
   height: 15px;
 }
 
-#hour_indicator div:nth-last-child(2){
+#routine_display #hour_indicator div:nth-last-child(2){
   border-width: 0 1px 0 1px;
 }
 
-#hour_indicator div:last-child {
+#routine_display #hour_indicator div:last-child {
   border: none;
   border-right: 1px solid var(--hour-indicator-border);
 }
 
-
-#hour_indicator div.show {
+#routine_display #hour_indicator div.show {
   height: 30px;
 }
 
-#hour_indicator div p {
+#routine_display #hour_indicator div p {
   position: absolute;
   top: 5px;
   left: 10%;
-}
-
-#button_field {
-  margin: 20px auto;
-}
-
-#button_field button {
-  width: 200px;
-  font-size: 16px;
-  padding: 5px 0;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-}
-
-#button_field #new {
-  background-color: var(--new-button-background);
-  color: black;
 }
 
 #button_field #del {
@@ -130,65 +189,209 @@ body {
 }
 
 #new_activity {
-  background-color: rgb(0,0,0,0.4);
-  box-shadow: inset 0 0 15px black;
+  background-color: var(--background-color);
+  /* box-shadow: inset 0 0 15px rgb(0,0,0,0.3); */
   color: white;
-  margin: 10px auto;
   font-size: 18px;
   padding: 0px;
-  overflow-y: hidden;
-  transition: height 0.5s, padding 0.5s, background-color 0.8s, 0.5s;
-  height: 0px;
+  transition: 0.4s;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 11;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 400px;
+  border-radius: 10px;
 }
 
 #new_activity.open {
-  background-color: rgb(0,0,0,0);
-  height: 160px;
-  padding: 20px;
-  margin: 30px auto;
+  display: flex;
+  animation: showup 0.5s ease;
 }
 
-#new_activity p {
-  display: inline-block;
+#new_activity h2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 30px;
+}
+
+#new_activity h2 span {
+  color: var(--new-button-background);
+}
+
+#new_activity div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  width: 80%;
+}
+
+#new_activity div span {
+  /* display: inline-block; */
   margin: 10px;
+  margin-left: 0;
+  font-size: 21px;
 }
 
 #new_activity input {
-  font-size: 14px;
+  font-size: 18px;
+  border-radius: 3px;
+  /* display: inline-block; */
 }
 
 #new_activity input#name {
-  padding: 5px 3px;
+  padding: 10px 10px;
+  width: 100%;
+  margin-right: 15px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+
+#new_activity input#color {
+  height: 40px;
+  border: none;
+  padding: -10px;
+
+}
+
+#new_activity input#start, #new_activity input#end {
+  padding: 7px 20px;
+  border: 2px solid black;
+  border-radius: 7px;
+}
+
+#new_activity #category {
+  display: flex;
+
+  flex-direction: column;
+}
+
+#new_activity #category #category_field {
+  /* border: 2px solid white; */
+  background-color: rgb(0,0,0,0.5);
+  margin: 0;
+  border-radius: 20px;
+  width: 100%;
+  height: 50px;
+  position: relative;
+  /* overflow-x: hidden; */
+}
+
+#new_activity #category #category_field div {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+#new_activity #category #category_field div i {
+  font-size: 20px;
+  transform: rotate(15deg);
+  transition: 0.5s;
+}
+
+#new_activity #category #category_field div.selected i {
+  transform: rotate(0deg) scale(115%);
+  color: black;
+}
+
+#new_activity #category #category_field div span {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  opacity: 0;
+  transition: top 0.4s, opacity 0.2s;
+}
+
+#new_activity #category #category_field div.selected span {
+  opacity: 1;
+  top: 30px;
+  transition: top 0.4s, opacity 0.4s 0.2s;
+}
+
+#new_activity #category #category_field #selector {
+  position: absolute;
+  border: none;
+  border-radius: 20px;
+  left: 0%;
+  transition: 0.2s;
+  width: 25%;
+  height: 100%;
+  background-color: var(--new-button-background);
+}
+
+#new_activity #button_field {
+  margin-left: 20px;
+  width: fit-content;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 15px;
 }
 
 #new_activity button {
-  width: 150px;
-  height: 30px;
-  margin: 15px;
+  width: 80px;
+  height: 50px;
+  font-size: 25px;
+  color: #242424;
+  margin-left: 10px;
   margin-bottom: 0;
-  font-size: 15px;
   cursor: pointer;
   border-radius: 5px;
   border-style: unset; 
-  box-shadow: 3px 3px 5px rgb(0,0,0,0.4);
+  /* box-shadow: 0px 0px 15px rgb(0,0,0,0.4); */
+}
+
+#new_activity #cancel {
+  background-color: black;
+  color: white;
 }
 
 #new_activity #add {
   background-color: var(--new-button-background);
-  
-  
+  transition: 0.2s;
+}
+
+#new_activity #add:hover {
+  background-color: #f3ff3b;
 }
 
 #manager {
-  width: 70%;
-  margin: auto;
+  width: fit-content;
+  padding: 40px 10px;
+  border-radius: 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: top;
+  margin: 40px auto;
+  transition: margin 1s height 1s;
+  background-color: rgb(0,0,0,0.1);
 }
 
 #manager #list {
-  flex-grow: 1;
+  width: 300px;
+  border-right: 1px solid rgb(255, 255, 255, 0.5);
+  padding: 0 20px;
+  transform: scaleY(1);
+  transition: transform 1s cubic-bezier(0, 1.19, 0.26, 0.96);
+}
+
+#manager #list.hide {
+  transform: scaleY(0);
 }
 
 #manager #list h2 {
@@ -216,6 +419,8 @@ body {
   cursor: pointer;
   display: flex;
   justify-content: space-around;
+  position: relative;
+  overflow: hidden;
 }
 
 #manager #list ul li:hover {
@@ -224,23 +429,103 @@ body {
   /* margin: 10px auto; */
 }
 
-#manager #list ul li p {
+#manager #list ul li span, #manager #list ul li i {
   /* trick to always make the text contrast with bg since its a user choice*/
+  flex-grow: 2;
   color: white;
   mix-blend-mode: exclusion;
   margin: 0;
   display: inline;
 }
 
-#manager #statistics {
-  flex-grow: 3;
+#manager #list ul li i {
+  flex-grow: 1;
+  font-size: 20px;
 }
 
 #manager #empty_message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 100;
+  font-size: 17px;
+  color: white;
+  padding: 50px 0;
+}
+
+#manager #empty_message.hide {
   display: none;
 }
 
-/* DEBUG */ 
-#manager div {
-  /* border-right: 1px solid rgb(0,0,0,0.8); */
+#manager #statistics {
+  display: flex;
+  width: fit-content;
+  transform: scaleY(1);
+  transition: transform 1s cubic-bezier(0, 1.19, 0.26, 0.96);
+}
+
+#manager #statistics.hide {
+  transform: scaleY(0);
+}
+
+#manager #statistics .circular_progress_field{
+  display: flex;
+  width: 250px;
+  padding: 50px 0;
+  border-radius: 8px;
+  margin: 0 25px;
+  /* background-color: black; */
+  row-gap: 30px;
+  /* border: 1px solid white; */
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+#manager #statistics .circular_progress {
+  position: relative;
+  height:  200px;
+  width: 200px;
+  padding: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--new-button-background) 180.6deg, #00000036 0deg);
+  transition: background 1s;
+  /* box-shadow: 0px 0px 15px rgb(0,0,0,0.2); */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#manager #statistics .circular_progress::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  /* box-shadow: inset 0px 0px 15px rgb(0,0,0,0.2); */
+  background-color: var(--background-color);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#manager #statistics .circular_progress #progress_value {
+  position: relative;
+  font-size: 40px;
+}
+
+#manager #statistics div #text {
+  font-size: 2.5vh;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+@keyframes showup {
+  0% {opacity: 0; transform: translate(-50%, -60%)}
+  100% {opacity: 1; transform: translate(-50%, -50%)}
 }
