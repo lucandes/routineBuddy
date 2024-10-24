@@ -2,7 +2,7 @@
 
 :root {
   --background-color: #2F343B;
-  --new-button-background: #a2c766;
+  --new-button-background: #9cc51f;
   --bar-background-color: #7E827A;
 
   --text-color: lightgrey;
@@ -69,10 +69,11 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 50px auto 10px auto;
+  margin: 100px auto 10px auto;
 }
 
 #routine_display #new_activity_button {
+  display: none;
   width: 240px;
   height: 30px;
   border-radius: 6px 6px 0 0 ;
@@ -113,12 +114,25 @@ body {
 }
 
 #routine_display #planner_bar {
-  /* border: 1px solid white; */
+  /* border-bottom: 2px solid rgb(0, 0, 0); */
   background-color: var(--bar-background-color);
   border-radius: 10px 10px 0 0;
   /* width: 80%; */
   height: 40px;
   position: relative;
+
+  line-height: 40px;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  transition: 0.5s;
+  cursor: pointer;
+  color: var(--background-color);
+}
+
+#routine_display #planner_bar:hover {
+  background: white;
+  letter-spacing: 6px;
 }
 
 #routine_display #planner_bar div {
@@ -126,12 +140,13 @@ body {
   border-radius: inherit;
   position: absolute;
   box-shadow: 0 0 10px rgb(0,0,0,0.3);
+  transform-origin: bottom center;
   
   display: flex;
   justify-content: center;
   align-items: center;
   transform: scale(1);
-  transition: 0.2s;
+  transition: 0.2s, letter-spacing 0.5s ;
   cursor: pointer;  
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -140,19 +155,17 @@ body {
 }
 
 #routine_display #planner_bar div:hover {
-  transform: scaleY(115%);
-  letter-spacing: 2px;
+  transform: scaleY(110%);
+  letter-spacing: 3px;
 }
 
 #routine_display #planner_bar div p {
-  /* trick to always make the text contrast with bg since its a user choice*/
   color: white;
-  mix-blend-mode: exclusion;
   margin: 0;
 }
 
 #routine_display #hour_indicator {
-  margin: 5px auto;
+  /* margin: 5px auto; */
   display: flex;
 }
 
@@ -244,6 +257,7 @@ body {
 
 #new_activity input {
   font-size: 18px;
+  border: none;
   border-radius: 3px;
   /* display: inline-block; */
 }
@@ -251,21 +265,29 @@ body {
 #new_activity input#name {
   padding: 10px 10px;
   width: 100%;
-  margin-right: 15px;
-  border: 2px solid black;
   border-radius: 7px;
 }
 
-#new_activity input#color {
-  height: 40px;
-  border: none;
-  padding: -10px;
+#new_activity #color_field {
+  width: fit-content;
+  margin: 0;
+}
 
+#new_activity #color_field button {
+  background-color: #c51f1f;
+  border-radius: 50%;
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  color: white;
+  transition: 0.2s;
+  cursor: pointer;
+  /* border: 3px solid white; */
+  transform: scale(1) rotate(0);
 }
 
 #new_activity input#start, #new_activity input#end {
   padding: 7px 20px;
-  border: 2px solid black;
   border-radius: 7px;
 }
 
@@ -319,7 +341,7 @@ body {
 
 #new_activity #category #category_field div.selected span {
   opacity: 1;
-  top: 30px;
+  top: 35px;
   transition: top 0.4s, opacity 0.4s 0.2s;
 }
 
@@ -329,9 +351,9 @@ body {
   border-radius: 20px;
   left: 0%;
   transition: 0.2s;
-  width: 25%;
-  height: 100%;
-  background-color: var(--new-button-background);
+  width: 20%;
+  height: 120%;
+  background: var(--new-button-background);
 }
 
 #new_activity #button_field {
@@ -430,10 +452,8 @@ body {
 }
 
 #manager #list ul li span, #manager #list ul li i {
-  /* trick to always make the text contrast with bg since its a user choice*/
   flex-grow: 2;
   color: white;
-  mix-blend-mode: exclusion;
   margin: 0;
   display: inline;
 }
