@@ -8,13 +8,14 @@
 	<title>RoutineBuddy</title>
 </head>
 <body>
-	<h1 id="logo">Routine<span>Buddy</span></h1>
-	<button id="teste">Test Activity</button>
+	<h1 id="logo"><a href="https://github.com/lucandes/routineBuddy" target="_blank">Routine<span>Buddy</span></a></h1>
+	<!-- <button id="teste">Test Activity</button> -->
 	
-	<div id="new_activity">
-		<h2>Create <span>Activity</span></h2>
+	<div id="activity_settings">
+		<h2 id="title_create">Create <span>Activity</span></h2>
+		<h2 id="title_edit">Edit <span>Activity</span></h2>
 		<div>
-			<span>Name</span><input type="text" name="actname" placeholder="Jogging, studying" id="name">
+			<span>Name</span><input type="text" name="actname" placeholder="Jogging, studying" id="name" maxlength="15">
 		</div>
 		
 		<div>
@@ -55,14 +56,13 @@
 		<div id="button_field">
 			<button id="cancel"><i class="fa-solid fa-xmark"></i></button>
 			<button id="add"><i class="fa-solid fa-plus"></i></button>
+			<button id="edit"><i class="fa-solid fa-check"></i></button>
 		</div>
 
 	</div>
 
 	<div id="routine_display">
-		<button id="new_activity_button">New Activity</button>
 		<div id="bar_field">
-			<div id="planner_bar"></div>
 			<div id="hour_indicator">
 				<div class="show"><p>0h</p></div>
 				<div></div>
@@ -89,6 +89,7 @@
 				<div></div>
 				<div class="show"></div>
 			</div>
+			<div id="planner_bar"></div>
 		</div>
 	</div>
 
@@ -117,6 +118,13 @@
 			<!-- <h3 id="avaliable">Avaliable: <span>24 hours</span></h3>
 			<h3 id="occupied">Occupied: <span>0 hours</span></h3> -->
 		</div>
+	</div>
+
+	<div id="activity_delete">
+		<h2>Delete <span>Activity</span>?</h2>
+		<p>This action cannot be undone.</p>
+		<button id="cancel"><i class="fa-solid fa-xmark"></i></button>
+		<button id="delete"><i class="fa-solid fa-trash"></i></button>
 	</div>
 
 	<div id="black_screen"></div>
